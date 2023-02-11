@@ -12,7 +12,7 @@ const CurrentWeatherResult = ({ unit, weather, location }) => {
   if (unit === "F") {
     temp = convertCelsiusToFahrenheit(temp);
   }
-  console.log(weather);
+
   return (
     <div className="currentWeather">
       <h2>
@@ -20,7 +20,7 @@ const CurrentWeatherResult = ({ unit, weather, location }) => {
       </h2>
       <h3>{weather.weather[0].main}</h3>
       <h3>
-        Temperature is {temp}
+        Temperature is {temp.toFixed(2)}
         {unit}
       </h3>
       <div className="weather-details">
@@ -28,10 +28,20 @@ const CurrentWeatherResult = ({ unit, weather, location }) => {
           {weather.name}, {weather.sys.country}{" "}
         </p>
         <div className="weather-details_sections">
-          <h3>Max/Min:</h3>
-          <span>
-            {temp} /{temp} {unit}
-          </span>
+          <h3>Max:</h3>
+          {unit === "F"
+            ? convertCelsiusToFahrenheit(weather.main.temp_max).toFixed(2)
+            : weather.main.temp_max.toFixed(2)}
+
+          {unit}
+        </div>
+        <div className="weather-details_sections">
+          <h3>Min:</h3>
+          {unit === "F"
+            ? convertCelsiusToFahrenheit(weather.main.temp_min).toFixed(2)
+            : weather.main.temp_min.toFixed(2)}
+
+          {unit}
         </div>
         <div className="weather-details_sections">
           <h3>Humidity: </h3>

@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { convertSecondsTimestampToDateString } from "../utils";
+import {
+  convertCelsiusToFahrenheit,
+  convertSecondsTimestampToDateString,
+} from "../utils";
 import "./Forecast.css";
 
 const weekday = [
@@ -12,6 +15,8 @@ const weekday = [
   "Friday",
   "Saturday",
 ];
+
+const MAX_DISPLAYED_DAYS = 5;
 
 const Forecast = ({ weather }) => {
   const [forecast, setForecast] = useState(null);
@@ -28,9 +33,10 @@ const Forecast = ({ weather }) => {
     })();
   }, [URL_Forecast]);
 
-  console.log("forecast", forecast);
-
   if (forecast) {
+    let dailyArray = [...forecast.daily];
+    dailyArray.length = MAX_DISPLAYED_DAYS;
+
     return (
       <>
         <h1>
@@ -38,7 +44,7 @@ const Forecast = ({ weather }) => {
         </h1>
         <div className="forecast-main">
           {/* important */}
-          {forecast.daily.splice(1, 5).map((dayForecast) => {
+          {dailyArray.map((dayForecast) => {
             return (
               <div className="forecast-container">
                 <div>
@@ -57,8 +63,17 @@ const Forecast = ({ weather }) => {
                   <div>
                     <span>Max/Min:</span>
                     <span>
-                      {dayForecast.temp.max}
-                      {unit}/{dayForecast.temp.min}
+                      {unit === "F"
+                        ? convertCelsiusToFahrenheit(
+                            dayForecast.temp.max
+                          ).toFixed(2)
+                        : dayForecast.temp.max.toFixed(2)}
+                      {unit} /{" "}
+                      {unit === "F"
+                        ? convertCelsiusToFahrenheit(
+                            dayForecast.temp.min
+                          ).toFixed(2)
+                        : dayForecast.temp.min.toFixed(2)}
                       {unit}
                     </span>
                   </div>
