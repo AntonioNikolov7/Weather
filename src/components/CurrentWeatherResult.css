@@ -1,0 +1,42 @@
+.currentWeather {
+  height: 100vh;
+  width: 100%;
+  color: rgb(255, 254, 254);
+  font-size: 20px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+span {
+  margin-left: 40px;
+  font-size: x-large;
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+  margin: 2px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 12px;
+  width: 40%;
+}
+
+.weather-details_sections {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 20px;
+  height: 30px;
+  width: 20%;
+  color: rgb(243, 243, 243);
+  font-size: 22px;
+  font-family: "Courier New", Courier, monospace;
+  text-decoration: underline rgb(235, 231, 231);
+}
+
+h1 {
+  color: rgb(216, 216, 216);
+}

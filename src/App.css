@@ -1,0 +1,22 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}
+
+video {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
