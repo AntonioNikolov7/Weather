@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import store from "./components/Redux/store";
+import store from "./components/store/store";
 import App from "./App";
 import { Provider } from "react-redux";
 

@@ -3,11 +3,24 @@ import React, { useEffect, useState } from "react";
 import "./Weather.css";
 
 import { useSelector, useDispatch } from "react-redux";
-import { unitC, unitF } from "./Redux/unitSwitch";
+import { unitC, unitF } from "./store/unitSwitch";
 import Button from "./shared/Button";
 import CurrentWeatherResult from "./CurrentWeatherResult";
 import Forecast from "./Forecast";
 import VideoBackground from "./VideoBackground";
+import SimpleSnackbar from "./shared/snackbar/Snack";
+import Search from "./Search";
+
+const ENTER_KEY = 13;
+
+const videoClouds =
+  "https://media.istockphoto.com/id/836470700/video/rain-clouds.mp4?s=mp4-640x640-is&k=20&c=qsD_Otvqq8PD8AgpSsTMTjnLGzXhMeb7AypOOFWt5BY=";
+const videoRain =
+  "https://media.istockphoto.com/id/1400084130/video/tropical-garden-during-the-rain-shower-naturally-blurred-background.mp4?s=mp4-640x640-is&k=20&c=FpA6ybYaWZf8caGOK9rcWgJW5u3odV9u-Og3dZRppg4=";
+const videoSunny =
+  "https://media.istockphoto.com/id/673210004/video/perfect-sunrise-with-mountains-with-big-orange-sun-and-decent-lens-flair.mp4?s=mp4-640x640-is&k=20&c=5cGx_VBtlM3dPDwhoqlH-Ho_dp6tLBIpcIZ48_UYgWE=";
+const videoSnow =
+  "https://media.istockphoto.com/id/1354145956/video/view-of-snowflakes-falling-in-a-very-windy-storm.mp4?s=mp4-640x640-is&k=20&c=gWKP_IfOCNxHGSnhqBd4qZ7ClBsVPPrsvmm3JSFaYKA=";
 
 const WeatherInputs = () => {
   const [weather, setWeather] = useState(null);
@@ -69,14 +82,6 @@ const WeatherInputs = () => {
     }
   };
 
-  const videoClouds =
-    "https://media.istockphoto.com/id/836470700/video/rain-clouds.mp4?s=mp4-640x640-is&k=20&c=qsD_Otvqq8PD8AgpSsTMTjnLGzXhMeb7AypOOFWt5BY=";
-  const videoRain =
-    "https://media.istockphoto.com/id/1400084130/video/tropical-garden-during-the-rain-shower-naturally-blurred-background.mp4?s=mp4-640x640-is&k=20&c=FpA6ybYaWZf8caGOK9rcWgJW5u3odV9u-Og3dZRppg4=";
-  const videoSunny =
-    "https://media.istockphoto.com/id/673210004/video/perfect-sunrise-with-mountains-with-big-orange-sun-and-decent-lens-flair.mp4?s=mp4-640x640-is&k=20&c=5cGx_VBtlM3dPDwhoqlH-Ho_dp6tLBIpcIZ48_UYgWE=";
-  const videoSnow =
-    "https://media.istockphoto.com/id/1354145956/video/view-of-snowflakes-falling-in-a-very-windy-storm.mp4?s=mp4-640x640-is&k=20&c=gWKP_IfOCNxHGSnhqBd4qZ7ClBsVPPrsvmm3JSFaYKA=";
   const getBackgroundVideo = () => {
     if (weather != null && weather?.weather?.length > 0) {
       const currentWeather = weather?.weather[0]?.main?.toLowerCase();
@@ -92,31 +97,22 @@ const WeatherInputs = () => {
     }
     return videoClouds;
   };
-  function handleKeyDown(event) {
-    if (event.keyCode === 13) {
-      getWeather();
-    }
-  }
 
   return (
     <>
       <div>
         <div className="main">
           <VideoBackground src={getBackgroundVideo()} />
-          <input
-            onKeyDown={handleKeyDown}
-            placeholder="Search..."
-            onChange={(e) => setEnteredCity(e.target.value)}
+          <Search
+            weather={weather}
+            onGetWeather={getWeather}
+            onCityChange={setEnteredCity}
+            onModeChange={setMode}
             value={enteredCity}
           />
-          <Button onClick={() => getWeather()}>Get Weather</Button>
-          {weather && (
-            <Button onClick={() => setMode("forecast")}>Get Forecast</Button>
-          )}
-          <span onClick={() => dispatch(unitF())}>F</span>
-          <span onClick={() => dispatch(unitC())}>°C</span>
         </div>
       </div>
+
       {mode === "forecast" ? (
         <Forecast weather={weather} />
       ) : (

@@ -1,5 +1,5 @@
 import React from "react";
-import { convertCelsiusToFahrenheit } from "../utils";
+import { convertCelsiusToFahrenheit } from "../utils/utils";
 import "./CurrentWeatherResult.css";
 
 const CurrentWeatherResult = ({ unit, weather, location }) => {
@@ -20,7 +20,7 @@ const CurrentWeatherResult = ({ unit, weather, location }) => {
       </h2>
       <h3>{weather.weather[0].main}</h3>
       <h3>
-        Temperature is {temp.toFixed(2)}
+        Temperature is {temp.toFixed(1)}
         {unit}
       </h3>
       <div className="weather-details">
@@ -30,16 +30,16 @@ const CurrentWeatherResult = ({ unit, weather, location }) => {
         <div className="weather-details_sections">
           <h3>Max:</h3>
           {unit === "F"
-            ? convertCelsiusToFahrenheit(weather.main.temp_max).toFixed(2)
-            : weather.main.temp_max.toFixed(2)}
+            ? convertCelsiusToFahrenheit(weather.main.temp_max).toFixed(1)
+            : weather.main.temp_max.toFixed(1)}
 
           {unit}
         </div>
         <div className="weather-details_sections">
           <h3>Min:</h3>
           {unit === "F"
-            ? convertCelsiusToFahrenheit(weather.main.temp_min).toFixed(2)
-            : weather.main.temp_min.toFixed(2)}
+            ? convertCelsiusToFahrenheit(weather.main.temp_min).toFixed(1)
+            : weather.main.temp_min.toFixed(1)}
 
           {unit}
         </div>

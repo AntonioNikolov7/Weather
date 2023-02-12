@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   convertCelsiusToFahrenheit,
   convertSecondsTimestampToDateString,
-} from "../utils";
+} from "../utils/utils";
 import "./Forecast.css";
 
 const weekday = [
@@ -31,7 +31,7 @@ const Forecast = ({ weather }) => {
         .then((data) => data);
       setForecast(foreCastData);
     })();
-  }, [URL_Forecast]);
+  }, [weather]);
 
   if (forecast) {
     let dailyArray = [...forecast.daily];
@@ -55,6 +55,7 @@ const Forecast = ({ weather }) => {
                           dayForecast.dt
                         ).getUTCDay()
                       ]
+                      // weekday[3], weekday[4]
                     }
                   </h1>
                   <span>{dayForecast.weather[0].main}</span>
@@ -67,13 +68,13 @@ const Forecast = ({ weather }) => {
                         ? convertCelsiusToFahrenheit(
                             dayForecast.temp.max
                           ).toFixed(2)
-                        : dayForecast.temp.max.toFixed(2)}
+                        : dayForecast.temp.max.toFixed(1)}
                       {unit} /{" "}
                       {unit === "F"
                         ? convertCelsiusToFahrenheit(
                             dayForecast.temp.min
-                          ).toFixed(2)
-                        : dayForecast.temp.min.toFixed(2)}
+                          ).toFixed(1)
+                        : dayForecast.temp.min.toFixed(1)}
                       {unit}
                     </span>
                   </div>
