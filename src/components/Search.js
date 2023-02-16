@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Button from "./shared/Button";
 import { unitC, unitF } from "./store/unitSwitch";
 
@@ -12,7 +12,6 @@ const Search = ({
   onCityChange,
   onModeChange,
 }) => {
-  const { unit } = useSelector((state) => state.unitSwitch);
   const dispatch = useDispatch();
 
   function handleKeyDown(event) {

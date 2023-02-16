@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import "./Weather.css";
-
-import { useSelector, useDispatch } from "react-redux";
-import { unitC, unitF } from "./store/unitSwitch";
-import Button from "./shared/Button";
+import { useSelector } from "react-redux";
 import CurrentWeatherResult from "./CurrentWeatherResult";
 import Forecast from "./Forecast";
 import VideoBackground from "./VideoBackground";
 import SimpleSnackbar from "./shared/snackbar/Snack";
 import Search from "./Search";
-
-const ENTER_KEY = 13;
 
 const videoClouds =
   "https://media.istockphoto.com/id/836470700/video/rain-clouds.mp4?s=mp4-640x640-is&k=20&c=qsD_Otvqq8PD8AgpSsTMTjnLGzXhMeb7AypOOFWt5BY=";
@@ -27,9 +22,8 @@ const WeatherInputs = () => {
   const [enteredCity, setEnteredCity] = useState("");
   const [mode, setMode] = useState(null);
   const [userLocation, setUserLocation] = useState(null);
-
+  //const [openSnack, setOpenSnack] = useState(false);
   const { unit } = useSelector((state) => state.unitSwitch);
-  const dispatch = useDispatch();
 
   const Api_Key = "eed5548dbdaf988a17640ac6bb2bffd8";
   const URL = `https://api.openweathermap.org/data/2.5/weather?q=${enteredCity}&appid=${Api_Key}&units=metric `;

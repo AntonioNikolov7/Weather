@@ -3,8 +3,6 @@ import { convertCelsiusToFahrenheit } from "../utils/utils";
 import "./CurrentWeatherResult.css";
 
 const CurrentWeatherResult = ({ unit, weather, location }) => {
-  //TO DO: If weather = null , fetch data for current location using useEffect?
-
   if (weather === null) {
     return <h1>Please enter a city to fetch weather data.</h1>;
   }

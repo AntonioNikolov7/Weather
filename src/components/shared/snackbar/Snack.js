@@ -4,10 +4,10 @@ import Snackbar from "@mui/material/Snackbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
-const SimpleSnackbar = ({ onOpen }) => {
+export default function SimpleSnackbar({ isOpen }) {
   const [open, setOpen] = React.useState(false);
 
-  if (onOpen === true) {
+  if (isOpen) {
     setOpen(true);
   }
 
@@ -46,6 +46,4 @@ const SimpleSnackbar = ({ onOpen }) => {
       />
     </div>
   );
-};
-
-export default SimpleSnackbar;
+}
