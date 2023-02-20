@@ -20,8 +20,7 @@ const MAX_DISPLAYED_DAYS = 5;
 
 const Forecast = ({ weather }) => {
   const [forecast, setForecast] = useState(null);
-  const Api_Key = "eed5548dbdaf988a17640ac6bb2bffd8";
-  const URL_Forecast = `https://api.openweathermap.org/data/3.0/onecall?lat=${weather.coord.lat}&lon=${weather.coord.lon}&appid=${Api_Key}&units=metric`;
+  const URL_Forecast = `https://api.openweathermap.org/data/3.0/onecall?lat=${weather.coord.lat}&lon=${weather.coord.lon}&appid=${process.env.REACT_APP_API_KEY}&units=metric`;
   const { unit } = useSelector((state) => state.unitSwitch);
 
   useEffect(() => {

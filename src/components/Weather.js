@@ -24,9 +24,7 @@ const WeatherInputs = () => {
   const [userLocation, setUserLocation] = useState(null);
   //const [openSnack, setOpenSnack] = useState(false);
   const { unit } = useSelector((state) => state.unitSwitch);
-
-  const Api_Key = "eed5548dbdaf988a17640ac6bb2bffd8";
-  const URL = `https://api.openweathermap.org/data/2.5/weather?q=${enteredCity}&appid=${Api_Key}&units=metric `;
+  const URL = `https://api.openweathermap.org/data/2.5/weather?q=${enteredCity}&appid=${process.env.REACT_APP_API_KEY}&units=metric `;
 
   //first rendering, initial data loading
   useEffect(() => {
@@ -37,7 +35,7 @@ const WeatherInputs = () => {
   useEffect(() => {
     (async () => {
       if (userLocation) {
-        const URL_CURRENT = `https://api.openweathermap.org/data/2.5/weather?lat=${userLocation.latitude}&lon=${userLocation.longitude}&appid=${Api_Key}&units=metric `;
+        const URL_CURRENT = `https://api.openweathermap.org/data/2.5/weather?lat=${userLocation.latitude}&lon=${userLocation.longitude}&appid=${process.env.REACT_APP_API_KEY}&units=metric `;
 
         const localWeather = await fetch(URL_CURRENT)
           .then((res) => res.json())
